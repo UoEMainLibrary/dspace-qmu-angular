@@ -1,6 +1,6 @@
 :host {
   footer {
-    background-color: #fff;
+    background-color: var(--ds-footer-bg);
     text-align: center;
     z-index: var(--ds-footer-z-index);
     border-top: var(--ds-footer-border);
