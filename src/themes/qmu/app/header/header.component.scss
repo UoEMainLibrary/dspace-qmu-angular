@@ -1,0 +1,26 @@
+.qmu-header {
+  background-color: #374a5c;
+}
+.qmu-header h1 {
+  color: #444;
+  font-family: "Oswald",sans-serif;
+  font-size: 2.3em;
+  margin: 1em;
+}
+.qmu-header h1 a {
+  color: #524c44;
+  text-decoration: none;
+}
+.qmu-header h1 a:hover {
+  text-decoration: none;
+  border-bottom: 1px dotted #ffffff;
+  color: #ffffff;
+}
+#sidebar a:link,
+#sidebar a:visited,
+#sidebar a {
+  color: #524c44;
+}
+.qmu-header-content {
+  background-color: #374a5c;
+}
