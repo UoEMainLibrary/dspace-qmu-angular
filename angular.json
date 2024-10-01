@@ -59,6 +59,11 @@
                 "input": "src/themes/dspace/styles/theme.scss",
                 "inject": false,
                 "bundleName": "dspace-theme"
+              },
+              {
+                "input": "src/themes/qmu/styles/theme.scss",
+                "inject": false,
+                "bundleName": "qmu-theme"
               }
             ],
             "scripts": [],
