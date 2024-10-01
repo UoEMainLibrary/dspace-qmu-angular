@@ -5,6 +5,6 @@
   // DSpace default: "DSpace Angular :: "
   "repository.title.prefix": "DSpace :: ",
 
-  "home.top-level-communities.head": "Communities in QMU Repositories"
+  "home.top-level-communities.head": "Communities in QMU Repositories",
 
 }
