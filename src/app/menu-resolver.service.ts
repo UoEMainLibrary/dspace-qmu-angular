@@ -447,6 +447,19 @@ export class MenuResolverService  {
           } as LinkMenuItemModel,
         },
         /*  Admin Search */
+        /* test adding new option */
+        {
+          id: 'ref_report',
+          active: false,
+          visible: isSiteAdmin,
+          model: {
+            type: MenuItemType.LINK,
+            text: 'REF Report',
+            link: '/admin/reports/ref',
+          } as LinkMenuItemModel,
+          icon: 'user-check',
+          index: 14,
+        },
       ];
       menuList.forEach((menuSection) => this.menuService.addSection(MenuID.ADMIN, Object.assign(menuSection, {
         shouldPersistOnRouteChange: true,

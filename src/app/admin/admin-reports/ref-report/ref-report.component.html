@@ -1,0 +1,117 @@
+<div class="container">
+  <div class="metadata-registry row">
+    <div class="col-12">
+
+      <h1 id="header" class="border-bottom pb-2">Find REF items</h1>
+
+      <p>Limit results to record that contain</p>
+
+      <div id="querydiv" [formGroup]="queryForm">
+        <ngb-accordion [closeOthers]="true" activeIds="fieldSelector" #acc="ngbAccordion">
+          <ngb-panel id="fieldSelector">
+            <ng-template ngbPanelTitle>
+              Field:
+            </ng-template>
+            <ng-template ngbPanelContent>
+              <select id="collSel" name="collSel" class="form-control" size="1" formControlName="fields">
+                <option *ngFor="let field of metadataFields" [value]="field.id" [disabled]="field.disabled">{{field.name$ | async}}</option>
+              </select>
+              <p>Selecting a metadata field from this dropdown limits the search results to those records that have some value, any value for that field.</p>
+              <div class="row">
+                <span class="col-3"></span>
+                <button class="btn btn-primary mt-1 col-6" (click)="submit()">Find</button>
+              </div>
+            </ng-template>
+          </ngb-panel>
+          <ngb-panel id="authorSelector">
+            <ng-template ngbPanelTitle>
+              Author:
+            </ng-template>
+            <ng-template ngbPanelContent>
+              <input type="text" [placeholder]="author" id="authorSel" name="authorSel" class="form-control" formControlName="author">
+              <p>Entering a value here limits the search results to those records that contain that value in the dc.contributor.author field.</p>
+              <div class="row">
+                <span class="col-3"></span>
+                <button class="btn btn-primary mt-1 col-6" (click)="submit()">Find</button>
+              </div>
+            </ng-template>
+          </ngb-panel>
+          <ngb-panel id="startSelector">
+            <ng-template ngbPanelTitle>
+              Start date:
+            </ng-template>
+            <ng-template ngbPanelContent>
+              <input type="date" [placeholder]="startDate" id="startSel" name="startSel" class="form-control" formControlName="startDate">
+              <p>Accepted format: yyyy, yyyy-mm, yyyy-mm-dd. Selecting a date here limits the search results to those records that have a later refterms.dateAccepted date value.</p>
+              <div class="row">
+                <span class="col-3"></span>
+                <button class="btn btn-primary mt-1 col-6" (click)="submit()">Find</button>
+              </div>
+            </ng-template>
+          </ngb-panel>
+          <ngb-panel id="endSelector">
+            <ng-template ngbPanelTitle>
+              End date:
+            </ng-template>
+            <ng-template ngbPanelContent>
+              <input type="date" [placeholder]="endDate" id="endSel" name="endSel" class="form-control" formControlName="endDate">
+              <p>Accepted format: yyyy, yyyy-mm, yyyy-mm-dd. Selecting a date here limits the search results to those records that have a earlier refterms.dateAccepted date value.</p>
+              <div class="row">
+                <span class="col-3"></span>
+                <button class="btn btn-primary mt-1 col-6" (click)="submit()">Find</button>
+              </div>
+            </ng-template>
+          </ngb-panel>
+          <ngb-panel id="excelSelector">
+            <ng-template ngbPanelTitle>
+              Export to Excel:
+            </ng-template>
+            <ng-template ngbPanelContent>
+              <input type="checkbox" [placeholder]="export" id="excelSel" name="excelSel" class="form-control" formControlName="export">
+              <p>Checking this box exports a linked CSV file containing the search results that can be downloaded.</p>
+              <div class="row">
+                <span class="col-3"></span>
+                <button class="btn btn-primary mt-1 col-6" (click)="submit()">Find</button>
+              </div>
+            </ng-template>
+          </ngb-panel>
+        </ngb-accordion>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!--
+<ds-configuration-search-page configuration="administrativeView"
+  [context]="context"
+  [showCsvExport]="true"
+  [showSidebar]="false"
+  [showViewModes]="false">
+</ds-configuration-search-page>
+-->
+
+<!-- supervision -->
+<!-- default -->
+<!-- administrativeView -->
+<!--
+<ds-configuration-search-page configuration="administrativeView"
+                              [context]="context"
+                              [showCsvExport]="true"
+                              [showSidebar]="false"
+                              [showViewModes]="false"
+                              [showScopeSelector]="false">
+</ds-configuration-search-page>
+-->
+
+<!--
+<div class="container">
+  <ng-container *ngTemplateOutlet="repContent"></ng-container>
+</div>
+
+<ng-template #repContent>
+  <ds-search-form [inPlaceSearch]="true"
+                  [searchPlaceholder]="'home.search-form.placeholder' | translate">
+  </ds-search-form>
+</ng-template>
+-->

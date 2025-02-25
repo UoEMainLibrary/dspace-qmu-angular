@@ -3,6 +3,7 @@ import { Route } from '@angular/router';
 import { i18nBreadcrumbResolver } from '../../core/breadcrumbs/i18n-breadcrumb.resolver';
 import { FilteredCollectionsComponent } from './filtered-collections/filtered-collections.component';
 import { FilteredItemsComponent } from './filtered-items/filtered-items.component';
+import { RefReportComponent } from './ref-report/ref-report.component';
 
 export const ROUTES: Route[] = [
   {
@@ -24,6 +25,17 @@ export const ROUTES: Route[] = [
       {
         path: '',
         component: FilteredItemsComponent,
+      },
+    ],
+  },
+  {
+    path: 'ref',
+    resolve: { breadcrumb: i18nBreadcrumbResolver },
+    data: { title: 'admin.reports.ref.title', breadcrumbKey: 'admin.reports.ref' },
+    children: [
+      {
+        path: '',
+        component: RefReportComponent,
       },
     ],
   },
