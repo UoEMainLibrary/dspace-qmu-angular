@@ -1,6 +1,7 @@
 import 'zone.js';
 import 'reflect-metadata';
 import 'core-js/es/reflect';
+import 'source-map-support/register';
 
 import { enableProdMode } from '@angular/core';
 import { bootstrapApplication } from '@angular/platform-browser';

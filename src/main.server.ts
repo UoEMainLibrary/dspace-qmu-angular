@@ -6,6 +6,7 @@ import 'reflect-metadata';
  * It's used for localization of dates, numbers, currencies, etc.
  */
 import '@angular/localize/init';
+import 'source-map-support/register';
 
 import { bootstrapApplication } from '@angular/platform-browser';
 
