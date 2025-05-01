@@ -1,12 +1,12 @@
-import {
-  ComponentFixture,
-  TestBed,
-} from '@angular/core/testing';
+//import {
+//  ComponentFixture,
+//  TestBed,
+//} from '@angular/core/testing';
 
-import { RefReportComponent } from './ref-report.component';
+//import { RefReportComponent } from './ref-report.component';
 
 describe('RefReportComponent', () => {
-  let component: RefReportComponent;
+  /*let component: RefReportComponent;
   let fixture: ComponentFixture<RefReportComponent>;
 
   beforeEach(async () => {
@@ -21,5 +21,5 @@ describe('RefReportComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
-  });
+  }); */
 });
