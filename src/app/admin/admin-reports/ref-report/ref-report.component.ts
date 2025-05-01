@@ -1,26 +1,45 @@
-import { AsyncPipe, NgForOf, NgIf } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NgbAccordionModule } from "@ng-bootstrap/ng-bootstrap";
-import { TranslateModule, TranslateService } from "@ngx-translate/core";
-
-import { MetadataFieldDataService } from "../../../core/data/metadata-field-data.service";
-import { MetadataSchemaDataService } from "../../../core/data/metadata-schema-data.service";
+import {
+  AsyncPipe,
+  NgForOf,
+  NgIf,
+} from '@angular/common';
+import { HttpParams } from '@angular/common/http';
+import {
+  Component,
+  OnInit,
+} from '@angular/core';
+import {
+  FormBuilder,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+} from '@angular/forms';
+import { NgbAccordionModule } from '@ng-bootstrap/ng-bootstrap';
+import {
+  TranslateModule,
+  TranslateService,
+} from '@ngx-translate/core';
+import {
+  forkJoin,
+  map,
+  Observable,
+} from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 import { DspaceRestService } from 'src/app/core/dspace-rest/dspace-rest.service';
-import { MetadataField } from "../../../core/metadata/metadata-field.model";
-import { MetadataSchema } from "../../../core/metadata/metadata-schema.model";
-import { getFirstSucceededRemoteListPayload} from "../../../core/shared/operators";
-import { isEmpty } from "../../../shared/empty.util";
-import { OptionVO } from "../filtered-items/option-vo.model";
-import { FiltersComponent } from "../filters-section/filters-section.component";
-import { FilteredItems } from "../filtered-items/filtered-items-model";
-import {forkJoin, map, Observable} from "rxjs";
-import { Item } from "../../../core/shared/item.model";
 import { RawRestResponse } from 'src/app/core/dspace-rest/raw-rest-response.model';
-import { environment } from "../../../../environments/environment";
-import { RestRequestMethod } from "../../../core/data/rest-request-method";
-import {switchMap} from "rxjs/operators";
-import {HttpParams} from "@angular/common/http";
+
+import { environment } from '../../../../environments/environment';
+import { MetadataFieldDataService } from '../../../core/data/metadata-field-data.service';
+import { MetadataSchemaDataService } from '../../../core/data/metadata-schema-data.service';
+import { RestRequestMethod } from '../../../core/data/rest-request-method';
+import { MetadataField } from '../../../core/metadata/metadata-field.model';
+import { MetadataSchema } from '../../../core/metadata/metadata-schema.model';
+import { Item } from '../../../core/shared/item.model';
+import { getFirstSucceededRemoteListPayload } from '../../../core/shared/operators';
+import { isEmpty } from '../../../shared/empty.util';
+import { FilteredItems } from '../filtered-items/filtered-items-model';
+import { OptionVO } from '../filtered-items/option-vo.model';
+import { FiltersComponent } from '../filters-section/filters-section.component';
 
 @Component({
   selector: 'ds-ref-report',
@@ -101,6 +120,25 @@ export class RefReportComponent implements OnInit {
     const anyField$ = this.translateService.stream('admin.reports.items.anyField');
     this.metadataFieldsWithAny.push(OptionVO.itemLoc('*', anyField$));
 
+    /*Select addName = form.addItem().addSelect("field");
+    addName.setLabel(T_field_label);
+    addName.addOption("0", "");
+    addName.setHelp(T_field_help);
+
+    java.util.List<MetadataField> fields = metadataFieldService.findAll(context);
+
+    for (MetadataField field : fields)
+    {
+      int fieldID = field.getID();
+      MetadataSchema schema = field.getMetadataSchema();
+      String name = schema.getName() + "." + field.getElement();
+      if (field.getQualifier() != null)
+      {
+        name += "." + field.getQualifier();
+      }
+
+      addName.addOption(fieldID, name);
+    }*/
     this.metadataSchemaService.findAll({ elementsPerPage: 10000, currentPage: 1 }).pipe(
       getFirstSucceededRemoteListPayload(),
       switchMap((schemasRest: MetadataSchema[]) =>

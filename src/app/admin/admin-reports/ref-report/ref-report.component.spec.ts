@@ -1,4 +1,7 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {
+  ComponentFixture,
+  TestBed,
+} from '@angular/core/testing';
 
 import { RefReportComponent } from './ref-report.component';
 
@@ -8,10 +11,9 @@ describe('RefReportComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [RefReportComponent]
+      imports: [RefReportComponent],
     })
-    .compileComponents();
-    
+      .compileComponents();
     fixture = TestBed.createComponent(RefReportComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
