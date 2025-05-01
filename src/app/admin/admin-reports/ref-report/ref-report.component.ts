@@ -93,13 +93,12 @@ export class RefReportComponent implements OnInit {
   }
 
 
-  submit() {
+  submit(): void {
     this.field = this.queryForm.get('field')?.value;
     this.author = this.queryForm.get('author')?.value;
     this.startDate = this.queryForm.get('startDate')?.value;
     this.endDate = this.queryForm.get('endDate')?.value;
     this.export = this.queryForm.get('export')?.value;
-    this.showResults = true;
 
     this.results$ = this
       .getRefItems()
@@ -111,6 +110,66 @@ export class RefReportComponent implements OnInit {
           return this.results.items;
         }),
       );
+
+    if (this.export) {
+      this.results$.subscribe(
+        results => {
+          const csvData = this.generateCSV(results);
+          const blob = new Blob([csvData], { type: 'text/csv' });
+          this.downloadCSV(blob, 'generated.csv');
+        },
+      );
+    } else {
+      this.showResults = true;
+    }
+  }
+
+  generateCSV(results: Item[]) {
+    if (!results) {
+      return '';
+    }
+
+    //const headers = Object.keys(results[0]);
+    //const headers = ['Title', 'Author', 'Date Issued', 'Date Accepted', 'Date FCD'];
+    const headers = [
+      'name',
+      'dc.contributor.author',
+      'dc.date.issued',
+      'refterms.dateAccepted',
+      'refterms.dateFCD',
+    ];
+    /*const csvRows = [
+      headers.join(','), // header row
+      ...results.map(row =>
+        headers.map(field => JSON.stringify(row[field] ?? '')).join(','),
+      ),
+    ];
+    return csvRows.join('\r\n');
+     */
+    const csvRows = [
+      headers.join(','), // header row
+      ...results.map(item => {
+        return headers.map(field => {
+          if (field === 'name') {
+            return JSON.stringify(item.name ?? '');
+          }
+
+          // Join all metadata values with semicolon
+          const values = item.metadata?.[field]?.map((entry: any) => entry.value) ?? [];
+          return JSON.stringify(values.join(', '));  // Use semicolon for clarity
+        }).join(',');
+      }),
+    ];
+
+    return csvRows.join('\r\n');
+  }
+  downloadCSV(blob: Blob, filename: string): void {
+    const a = document.createElement('a');
+    const objectUrl = URL.createObjectURL(blob);
+    a.href = objectUrl;
+    a.download = filename;
+    a.click();
+    URL.revokeObjectURL(objectUrl);
   }
 
   loadMetadataFields(): void {
