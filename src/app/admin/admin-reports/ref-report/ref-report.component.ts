@@ -94,6 +94,7 @@ export class RefReportComponent implements OnInit {
 
 
   submit(): void {
+    console.log('Submit called');
     this.field = this.queryForm.get('field')?.value;
     this.author = this.queryForm.get('author')?.value;
     this.startDate = this.queryForm.get('startDate')?.value;
@@ -112,6 +113,7 @@ export class RefReportComponent implements OnInit {
       );
 
     if (this.export) {
+      console.log('CSV output requested');
       this.results$.subscribe(
         results => {
           const csvData = this.generateCSV(results);
