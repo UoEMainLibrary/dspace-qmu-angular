@@ -89,7 +89,7 @@
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let item of results$ | async">
+      <tr *ngFor="let item of items">
         <td class="num"><a *ngIf="item.handle" href="/handle/{{ item.handle }}" rel="noopener noreferrer">{{ item.name }}</a></td>
         <td><span *ngFor="let entry of item.metadata['dc.contributor.author']; let last = last">
           {{ entry.value }}<span *ngIf="!last">, </span>
