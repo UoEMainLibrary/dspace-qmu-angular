@@ -75,36 +75,36 @@
     <div>
       Showing {{ items.length }} matches
     </div>
+    <div>
+      <a href="/admin/reports/ref" rel="noopener noreferrer">New Search</a>
+    </div>
+    <table id="table" class="table table-striped">
+      <thead>
+      <tr class="header">
+        <th>Title</th>
+        <th>Author</th>
+        <th>Date Issued</th>
+        <th>Date Accepted</th>
+        <th>Date FCD</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let item of results$ | async">
+        <td class="num"><a *ngIf="item.handle" href="/handle/{{ item.handle }}" rel="noopener noreferrer">{{ item.name }}</a></td>
+        <td><span *ngFor="let entry of item.metadata['dc.contributor.author']; let last = last">
+          {{ entry.value }}<span *ngIf="!last">, </span>
+        </span></td>
+        <td><span *ngFor="let entry of item.metadata['dc.date.issued']; let last = last">
+          {{ entry.value }}<span *ngIf="!last">, </span>
+        </span></td>
+        <td><span *ngFor="let entry of item.metadata['refterms.dateAccepted']; let last = last">
+          {{ entry.value }}<span *ngIf="!last">, </span>
+        </span></td>
+        <td><span *ngFor="let entry of item.metadata['refterms.dateFCD']; let last = last">
+          {{ entry.value }}<span *ngIf="!last">, </span>
+        </span></td>
+      </tr>
+      </tbody>
+    </table>
   </ng-container>
-  <div>
-    <a href="/admin/reports/ref" rel="noopener noreferrer">New Search</a>
-  </div>
-  <table id="table" class="table table-striped">
-    <thead>
-    <tr class="header">
-      <th>Title</th>
-      <th>Author</th>
-      <th>Date Issued</th>
-      <th>Date Accepted</th>
-      <th>Date FCD</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let item of results$ | async">
-      <td class="num"><a *ngIf="item.handle" href="/handle/{{ item.handle }}" rel="noopener noreferrer">{{ item.name }}</a></td>
-      <td><span *ngFor="let entry of item.metadata['dc.contributor.author']; let last = last">
-        {{ entry.value }}<span *ngIf="!last">, </span>
-      </span></td>
-      <td><span *ngFor="let entry of item.metadata['dc.date.issued']; let last = last">
-        {{ entry.value }}<span *ngIf="!last">, </span>
-      </span></td>
-      <td><span *ngFor="let entry of item.metadata['refterms.dateAccepted']; let last = last">
-        {{ entry.value }}<span *ngIf="!last">, </span>
-      </span></td>
-      <td><span *ngFor="let entry of item.metadata['refterms.dateFCD']; let last = last">
-        {{ entry.value }}<span *ngIf="!last">, </span>
-      </span></td>
-    </tr>
-    </tbody>
-  </table>
 </ng-template>
