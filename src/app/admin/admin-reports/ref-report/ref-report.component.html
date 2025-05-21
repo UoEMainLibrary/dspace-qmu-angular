@@ -57,21 +57,22 @@
 </ng-template>
 
 <ng-template #results>
-  <h1 class="pb-2">View REF items</h1>
-
-  <div *ngIf="queryForm.get('field')?.value !== ''">
-    Field: {{ queryForm.get('field')?.value }}
-  </div>
-  <div *ngIf="queryForm.get('author')?.value">
-    Author {{ queryForm.get('author')?.value }}
-  </div>
-  <div *ngIf="queryForm.get('startDate')?.value">
-    Start date {{ queryForm.get('startDate')?.value }}
-  </div>
-  <div *ngIf="queryForm.get('endDate')?.value">
-    End date {{ queryForm.get('endDate')?.value }}
-  </div>
   <ng-container *ngIf="results$ | async; let items">
+    <h1 class="pb-2">View REF items</h1>
+
+    <div *ngIf="queryForm.get('field')?.value !== ''">
+      Field: {{ queryForm.get('field')?.value }}
+    </div>
+    <div *ngIf="queryForm.get('author')?.value">
+      Author {{ queryForm.get('author')?.value }}
+    </div>
+    <div *ngIf="queryForm.get('startDate')?.value">
+      Start date {{ queryForm.get('startDate')?.value }}
+    </div>
+    <div *ngIf="queryForm.get('endDate')?.value">
+      End date {{ queryForm.get('endDate')?.value }}
+    </div>
+
     <div>
       Showing {{ items.length }} matches
     </div>
