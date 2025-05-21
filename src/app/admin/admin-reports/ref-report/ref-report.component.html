@@ -10,6 +10,15 @@
 
 
 <ng-template #search>
+  <!-- my-component.component.html -->
+  <div *ngIf="loading" class="spinner">
+    Loading, please wait...
+  </div>
+
+  <div *ngIf="errorMessage" class="error">
+    {{ errorMessage }}
+  </div>
+
   <h1 class="border-bottom pb-2">Find REF items</h1>
 
   <p>Limit results to records that contain</p>

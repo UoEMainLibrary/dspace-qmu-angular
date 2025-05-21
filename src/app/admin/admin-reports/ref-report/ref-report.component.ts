@@ -22,9 +22,9 @@ import {
 import {
   forkJoin,
   map,
-  Observable,
+  Observable, throwError, timeout,
 } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import {catchError, finalize, switchMap} from 'rxjs/operators';
 import { DspaceRestService } from 'src/app/core/dspace-rest/dspace-rest.service';
 import { RawRestResponse } from 'src/app/core/dspace-rest/raw-rest-response.model';
 
@@ -70,6 +70,8 @@ export class RefReportComponent implements OnInit {
   results: FilteredItems = new FilteredItems();
   results$: Observable<Item[]>;
   matches = 0;
+  loading = false;
+  errorMessage: string | null = null;
 
   constructor(
     private metadataSchemaService: MetadataSchemaDataService,
@@ -81,6 +83,8 @@ export class RefReportComponent implements OnInit {
   ngOnInit() {
     this.showResults = false;
     this.loadMetadataFields();
+    this.loading = false;
+    this.errorMessage = null;
 
     this.queryForm = this.formBuilder.group({
       field: '',
@@ -104,12 +108,24 @@ export class RefReportComponent implements OnInit {
     this.results$ = this
       .getRefItems()
       .pipe(
+        timeout(10000), // 10-second timeout
         map(response => {
           const offset = this.currentPage * this.pageSize();
           this.matches = this.results.itemCount;
           this.results.deserialize(response.payload, offset);
           return this.results.items;
         }),
+        catchError(error => {
+          if (error.name === 'TimeoutError') {
+            this.errorMessage = 'The server is taking too long to respond.';
+          } else {
+            this.errorMessage = 'An unexpected error occurred.';
+          }
+          return throwError(() => error);
+        }),
+        finalize(() => {
+          this.loading = false;
+        })
       );
 
     if (this.export) {
