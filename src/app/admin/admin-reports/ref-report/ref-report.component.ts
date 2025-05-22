@@ -102,6 +102,7 @@ export class RefReportComponent implements OnInit {
     this.startDate = this.queryForm.get('startDate')?.value;
     this.endDate = this.queryForm.get('endDate')?.value;
     this.export = this.queryForm.get('export')?.value;
+    console.log('Setting showLoading');
     this.showLoading = true;
 
     this.results$ = this
@@ -126,6 +127,7 @@ export class RefReportComponent implements OnInit {
         },
       );
     } else {
+      console.log('Setting showResults');
       this.showResults = true;
     }
   }

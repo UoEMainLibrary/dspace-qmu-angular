@@ -10,16 +10,12 @@
 
 
 <ng-template #search>
-  <div *ngIf="showLoading" class="spinner">
-    Loading, please wait...
-  </div>
-  <div *ngIf="!showLoading">
+
     <h1 class="border-bottom pb-2">Find REF items</h1>
 
     <p>Limit results to records that contain</p>
 
     <div id="querydiv" [formGroup]="queryForm">
-
       <div>
         <label>Field:</label>
         <select id="fieldSel" name="fieldSel" class="form-control" size="1" formControlName="field">
@@ -58,10 +54,12 @@
         </div>
       </div>
     </div>
-  </div>
 </ng-template>
 
 <ng-template #results>
+  <div *ngIf="showLoading" class="spinner">
+    Loading, please wait...
+  </div>
   <ng-container *ngIf="results$ | async; let items">
     <h1 class="pb-2">View REF items</h1>
 
