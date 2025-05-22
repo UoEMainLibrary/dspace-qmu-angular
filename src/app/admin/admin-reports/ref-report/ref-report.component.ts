@@ -22,9 +22,9 @@ import {
 import {
   forkJoin,
   map,
-  Observable, throwError, timeout,
+  Observable,
 } from 'rxjs';
-import {catchError, finalize, switchMap} from 'rxjs/operators';
+import { switchMap } from 'rxjs/operators';
 import { DspaceRestService } from 'src/app/core/dspace-rest/dspace-rest.service';
 import { RawRestResponse } from 'src/app/core/dspace-rest/raw-rest-response.model';
 
@@ -67,11 +67,10 @@ export class RefReportComponent implements OnInit {
   endDate: Date | null = null;
   export = false;
   showResults = false;
+  showLoading = false;
   results: FilteredItems = new FilteredItems();
   results$: Observable<Item[]>;
   matches = 0;
-  loading = false;
-  errorMessage: string | null = null;
 
   constructor(
     private metadataSchemaService: MetadataSchemaDataService,
@@ -82,9 +81,8 @@ export class RefReportComponent implements OnInit {
 
   ngOnInit() {
     this.showResults = false;
+    this.showLoading = false;
     this.loadMetadataFields();
-    this.loading = false;
-    this.errorMessage = null;
 
     this.queryForm = this.formBuilder.group({
       field: '',
@@ -104,28 +102,18 @@ export class RefReportComponent implements OnInit {
     this.startDate = this.queryForm.get('startDate')?.value;
     this.endDate = this.queryForm.get('endDate')?.value;
     this.export = this.queryForm.get('export')?.value;
+    this.showLoading = true;
 
     this.results$ = this
       .getRefItems()
       .pipe(
-        timeout(10000), // 10-second timeout
         map(response => {
           const offset = this.currentPage * this.pageSize();
           this.matches = this.results.itemCount;
           this.results.deserialize(response.payload, offset);
+          this.showLoading = false;
           return this.results.items;
         }),
-        catchError(error => {
-          if (error.name === 'TimeoutError') {
-            this.errorMessage = 'The server is taking too long to respond.';
-          } else {
-            this.errorMessage = 'An unexpected error occurred.';
-          }
-          return throwError(() => error);
-        }),
-        finalize(() => {
-          this.loading = false;
-        })
       );
 
     if (this.export) {
