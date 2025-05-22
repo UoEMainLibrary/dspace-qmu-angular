@@ -10,47 +10,52 @@
 
 
 <ng-template #search>
-  <h1 class="border-bottom pb-2">Find REF items</h1>
+  <div *ngIf="showLoading" class="spinner">
+    Loading, please wait...
+  </div>
+  <div *ngIf="!showLoading">
+    <h1 class="border-bottom pb-2">Find REF items</h1>
 
-  <p>Limit results to records that contain</p>
+    <p>Limit results to records that contain</p>
 
-  <div id="querydiv" [formGroup]="queryForm">
+    <div id="querydiv" [formGroup]="queryForm">
 
-    <div>
-      <label>Field:</label>
-      <select id="fieldSel" name="fieldSel" class="form-control" size="1" formControlName="field">
-        <option *ngFor="let field of metadataFields" [value]="field.id" [disabled]="field.disabled">{{field.name$ | async}}</option>
-      </select>
-      <p>Selecting a metadata field from this dropdown limits the search results to those records that have some value, any value for that field.</p>
-    </div>
-
-    <div>
-      <label>Author:</label>
-      <input type="text" [placeholder]="author" id="authorSel" name="authorSel" class="form-control" formControlName="author">
-      <p>Entering a value here limits the search results to those records that contain that value in the dc.contributor.author field.</p>
-    </div>
-
-    <div>
-      <label>Start date:</label>
-      <input type="date" [placeholder]="startDate" id="startSel" name="startSel" class="form-control" formControlName="startDate">
-      <p>Accepted format: yyyy, yyyy-mm, yyyy-mm-dd. Selecting a date here limits the search results to those records that have a later refterms.dateAccepted date value.</p>
-    </div>
-
-    <div>
-      <label>End date:</label>
-      <input type="date" [placeholder]="endDate" id="endSel" name="endSel" class="form-control" formControlName="endDate">
-      <p>Accepted format: yyyy, yyyy-mm, yyyy-mm-dd. Selecting a date here limits the search results to those records that have a earlier refterms.dateAccepted date value.</p>
-    </div>
-
-    <div>
-      <label>Export to Excel:</label>
       <div>
-        <input type="checkbox" [placeholder]="export" id="excelSel" name="excelSel" class="dynamic-ng-bootstrap-checkbox" formControlName="export">
+        <label>Field:</label>
+        <select id="fieldSel" name="fieldSel" class="form-control" size="1" formControlName="field">
+          <option *ngFor="let field of metadataFields" [value]="field.id" [disabled]="field.disabled">{{field.name$ | async}}</option>
+        </select>
+        <p>Selecting a metadata field from this dropdown limits the search results to those records that have some value, any value for that field.</p>
       </div>
-      <p>Checking this box exports a linked CSV file containing the search results that can be downloaded.</p>
-      <div class="row">
-        <span class="col-3"></span>
-        <button class="btn btn-primary mt-1 col-6" (click)="submit()">Find</button>
+
+      <div>
+        <label>Author:</label>
+        <input type="text" [placeholder]="author" id="authorSel" name="authorSel" class="form-control" formControlName="author">
+        <p>Entering a value here limits the search results to those records that contain that value in the dc.contributor.author field.</p>
+      </div>
+
+      <div>
+        <label>Start date:</label>
+        <input type="date" [placeholder]="startDate" id="startSel" name="startSel" class="form-control" formControlName="startDate">
+        <p>Accepted format: yyyy, yyyy-mm, yyyy-mm-dd. Selecting a date here limits the search results to those records that have a later refterms.dateAccepted date value.</p>
+      </div>
+
+      <div>
+        <label>End date:</label>
+        <input type="date" [placeholder]="endDate" id="endSel" name="endSel" class="form-control" formControlName="endDate">
+        <p>Accepted format: yyyy, yyyy-mm, yyyy-mm-dd. Selecting a date here limits the search results to those records that have a earlier refterms.dateAccepted date value.</p>
+      </div>
+
+      <div>
+        <label>Export to Excel:</label>
+        <div>
+          <input type="checkbox" [placeholder]="export" id="excelSel" name="excelSel" class="dynamic-ng-bootstrap-checkbox" formControlName="export">
+        </div>
+        <p>Checking this box exports a linked CSV file containing the search results that can be downloaded.</p>
+        <div class="row">
+          <span class="col-3"></span>
+          <button class="btn btn-primary mt-1 col-6" (click)="submit()">Find</button>
+        </div>
       </div>
     </div>
   </div>
@@ -58,59 +63,54 @@
 
 <ng-template #results>
   <ng-container *ngIf="results$ | async; let items">
-    <div *ngIf="showLoading" class="spinner">
-      Loading, please wait...
-    </div>
-    <div *ngIf="!showLoading" class="spinner">
-      <h1 class="pb-2">View REF items</h1>
+    <h1 class="pb-2">View REF items</h1>
 
-      <div *ngIf="queryForm.get('field')?.value !== ''">
-        Field: {{ queryForm.get('field')?.value }}
-      </div>
-      <div *ngIf="queryForm.get('author')?.value">
-        Author {{ queryForm.get('author')?.value }}
-      </div>
-      <div *ngIf="queryForm.get('startDate')?.value">
-        Start date {{ queryForm.get('startDate')?.value }}
-      </div>
-      <div *ngIf="queryForm.get('endDate')?.value">
-        End date {{ queryForm.get('endDate')?.value }}
-      </div>
-
-      <div>
-        Showing {{ items.length }} matches
-      </div>
-      <div>
-        <a href="/admin/reports/ref" rel="noopener noreferrer">New Search</a>
-      </div>
-      <table id="table" class="table table-striped">
-        <thead>
-        <tr class="header">
-          <th>Title</th>
-          <th>Author</th>
-          <th>Date Issued</th>
-          <th>Date Accepted</th>
-          <th>Date FCD</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="let item of items">
-          <td class="num"><a *ngIf="item.handle" href="/handle/{{ item.handle }}" rel="noopener noreferrer">{{ item.name }}</a></td>
-          <td><span *ngFor="let entry of item.metadata['dc.contributor.author']; let last = last">
-            {{ entry.value }}<span *ngIf="!last">, </span>
-          </span></td>
-          <td><span *ngFor="let entry of item.metadata['dc.date.issued']; let last = last">
-            {{ entry.value }}<span *ngIf="!last">, </span>
-          </span></td>
-          <td><span *ngFor="let entry of item.metadata['refterms.dateAccepted']; let last = last">
-            {{ entry.value }}<span *ngIf="!last">, </span>
-          </span></td>
-          <td><span *ngFor="let entry of item.metadata['refterms.dateFCD']; let last = last">
-            {{ entry.value }}<span *ngIf="!last">, </span>
-          </span></td>
-        </tr>
-        </tbody>
-      </table>
+    <div *ngIf="queryForm.get('field')?.value !== ''">
+      Field: {{ queryForm.get('field')?.value }}
     </div>
+    <div *ngIf="queryForm.get('author')?.value">
+      Author {{ queryForm.get('author')?.value }}
+    </div>
+    <div *ngIf="queryForm.get('startDate')?.value">
+      Start date {{ queryForm.get('startDate')?.value }}
+    </div>
+    <div *ngIf="queryForm.get('endDate')?.value">
+      End date {{ queryForm.get('endDate')?.value }}
+    </div>
+
+    <div>
+      Showing {{ items.length }} matches
+    </div>
+    <div>
+      <a href="/admin/reports/ref" rel="noopener noreferrer">New Search</a>
+    </div>
+    <table id="table" class="table table-striped">
+      <thead>
+      <tr class="header">
+        <th>Title</th>
+        <th>Author</th>
+        <th>Date Issued</th>
+        <th>Date Accepted</th>
+        <th>Date FCD</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let item of items">
+        <td class="num"><a *ngIf="item.handle" href="/handle/{{ item.handle }}" rel="noopener noreferrer">{{ item.name }}</a></td>
+        <td><span *ngFor="let entry of item.metadata['dc.contributor.author']; let last = last">
+          {{ entry.value }}<span *ngIf="!last">, </span>
+        </span></td>
+        <td><span *ngFor="let entry of item.metadata['dc.date.issued']; let last = last">
+          {{ entry.value }}<span *ngIf="!last">, </span>
+        </span></td>
+        <td><span *ngFor="let entry of item.metadata['refterms.dateAccepted']; let last = last">
+          {{ entry.value }}<span *ngIf="!last">, </span>
+        </span></td>
+        <td><span *ngFor="let entry of item.metadata['refterms.dateFCD']; let last = last">
+          {{ entry.value }}<span *ngIf="!last">, </span>
+        </span></td>
+      </tr>
+      </tbody>
+    </table>
   </ng-container>
 </ng-template>
