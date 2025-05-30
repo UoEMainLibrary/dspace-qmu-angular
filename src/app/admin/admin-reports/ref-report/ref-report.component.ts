@@ -5,7 +5,7 @@ import {
 } from '@angular/common';
 import { HttpParams } from '@angular/common/http';
 import {
-  Component,
+  Component, DestroyRef, inject,
   OnInit,
 } from '@angular/core';
 import {
@@ -68,9 +68,11 @@ export class RefReportComponent implements OnInit {
   export = false;
   showResults = false;
   showLoading = false;
+  errorMessage = '';
   results: FilteredItems = new FilteredItems();
   results$: Observable<Item[]>;
   matches = 0;
+  private destroyRef = inject(DestroyRef);
 
   constructor(
     private metadataSchemaService: MetadataSchemaDataService,
@@ -119,13 +121,15 @@ export class RefReportComponent implements OnInit {
 
     if (this.export) {
       console.log('CSV output requested');
-      this.results$.subscribe(
+      const subscription = this.results$.subscribe(
         results => {
           const csvData = this.generateCSV(results);
           const blob = new Blob([csvData], { type: 'text/csv' });
           this.downloadCSV(blob, 'generated.csv');
         },
       );
+
+      this.destroyRef.onDestroy(() => subscription?.unsubscribe());
     } else {
       console.log('Setting showResults');
       this.showResults = true;

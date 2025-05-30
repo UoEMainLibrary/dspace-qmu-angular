@@ -60,6 +60,10 @@
   <div *ngIf="showLoading" class="spinner">
     Loading, please wait...
   </div>
+  <!-- Error Message -->
+  <div *ngIf="!showLoading && errorMessage" class="error">
+    {{ errorMessage }}
+  </div>
   <ng-container *ngIf="results$ | async; let items">
     <h1 class="pb-2">View REF items</h1>
 
