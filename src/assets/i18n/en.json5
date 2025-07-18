@@ -1000,9 +1000,9 @@
 
   "browse.back.all-results": "All browse results",
 
-  "browse.comcol.by.author": "By Author",
+  "browse.comcol.by.author": "By Person",
 
-  "browse.comcol.by.dateissued": "By Issue Date",
+  "browse.comcol.by.dateissued": "By Year",
 
   "browse.comcol.by.subject": "By Subject",
 
@@ -1013,6 +1013,12 @@
   "browse.comcol.by.title": "By Title",
 
   "browse.comcol.head": "Browse",
+
+  // Custom browse comcol
+  "browse.comcol.by.qmuauthor": "By QMU Author",
+
+  "browse.comcol.by.researchcentre": "By Research Centre",
+  // Custom browse comcol end
 
   "browse.empty": "No items to show.",
 
