@@ -1027,7 +1027,7 @@
   "browse.metadata.srsc": "Subject Category",
 
   // Custom browse metadata
-  "browse.metadata.qmuauther": "QMU Author",
+  "browse.metadata.qmuauthor": "QMU Author",
 
   "browse.metadata.researchcentre": "Research Centre",
   // Custom browse metadata end
