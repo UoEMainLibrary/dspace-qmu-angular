@@ -1016,9 +1016,9 @@
 
   "browse.empty": "No items to show.",
 
-  "browse.metadata.author": "Author",
+  "browse.metadata.author": "Person",
 
-  "browse.metadata.dateissued": "Issue Date",
+  "browse.metadata.dateissued": "Year",
 
   "browse.metadata.subject": "Subject",
 
@@ -1026,9 +1026,15 @@
 
   "browse.metadata.srsc": "Subject Category",
 
-  "browse.metadata.author.breadcrumbs": "Browse by Author",
+  // Custom browse metadata
+  "browse.metadata.qmuauther": "QMU Author",
 
-  "browse.metadata.dateissued.breadcrumbs": "Browse by Date",
+  "browse.metadata.researchcentre": "Research Centre",
+  // Custom browse metadata end
+
+  "browse.metadata.author.breadcrumbs": "Browse by Person",
+
+  "browse.metadata.dateissued.breadcrumbs": "Browse by Year",
 
   "browse.metadata.subject.breadcrumbs": "Browse by Subject",
 
@@ -1041,6 +1047,12 @@
   "browse.metadata.nsi.tree.descrption": "Select an index to add as search filter",
 
   "browse.metadata.title.breadcrumbs": "Browse by Title",
+
+  // Custom browse breadcrumbs
+  "browse.metadata.qmuauthor.breadcrumbs": "Browse by QMU Author",
+
+  "browse.metadata.researchcentre.breadcrumbs": "Browse by Research Centre",
+  // Custom browse breadcrumbs end
 
   "pagination.next.button": "Next",
 
@@ -3226,17 +3238,17 @@
 
   "menu.section.browse_community": "This Community",
 
-  "menu.section.browse_community_by_author": "By Author",
+  "menu.section.browse_community_by_author": "By Person",
 
-  "menu.section.browse_community_by_issue_date": "By Issue Date",
+  "menu.section.browse_community_by_issue_date": "By Year",
 
   "menu.section.browse_community_by_title": "By Title",
 
   "menu.section.browse_global": "All of DSpace",
 
-  "menu.section.browse_global_by_author": "By Author",
+  "menu.section.browse_global_by_author": "By Person",
 
-  "menu.section.browse_global_by_dateissued": "By Issue Date",
+  "menu.section.browse_global_by_dateissued": "By Year",
 
   "menu.section.browse_global_by_subject": "By Subject",
 
@@ -3247,6 +3259,12 @@
   "menu.section.browse_global_by_title": "By Title",
 
   "menu.section.browse_global_communities_and_collections": "Communities & Collections",
+
+  // Custom menu sections
+  "menu.section.browse_global_by_qmuauthor": "By QMU Author",
+
+  "menu.section.browse_global_by_researchcentre": "By Research Centre",
+  // Custom menu sections end
 
   "menu.section.control_panel": "Control Panel",
 
