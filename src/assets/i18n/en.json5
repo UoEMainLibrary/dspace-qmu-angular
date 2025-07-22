@@ -4200,9 +4200,9 @@
 
   "repository.image.logo": "Repository logo",
 
-  "repository.title": "DSpace Repository",
+  "repository.title": "QMU Repositories",
 
-  "repository.title.prefix": "DSpace Repository :: ",
+  "repository.title.prefix": "",
 
   "resource-policies.add.button": "Add",
 
