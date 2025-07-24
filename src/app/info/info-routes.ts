@@ -17,11 +17,13 @@ import {
   PRIVACY_PATH,
   ACCESSIBILITY_PATH,
   POLICY_PATH,
+  CONTACT_US_PATH,
 } from './info-routing-paths';
 import { NotifyInfoComponent } from './notify-info/notify-info.component';
 import { ThemedPrivacyComponent } from './privacy/themed-privacy.component';
 import { ThemedAccessibilityComponent } from './accessibility/themed-accessibility.component';
 import { ThemedPolicyComponent } from './policy/themed-policy.component';
+import { ThemedContactUsComponent } from './contact-us/themed-contact-us.component';
 
 
 export const ROUTES: Routes = [
@@ -67,5 +69,11 @@ export const ROUTES: Routes = [
     component: ThemedPolicyComponent,
     resolve: { breadcrumb: i18nBreadcrumbResolver },
     data: { title: 'info.policy.title', breadcrumbKey: 'info.policy' }
+  },
+  {
+    path: CONTACT_US_PATH,
+    component: ThemedContactUsComponent,
+    resolve: { breadcrumb: i18nBreadcrumbResolver },
+    data: { title: 'info.contact-us.title', breadcrumbKey: 'info.contact-us' }
   },
 ].filter((route: Route) => hasValue(route));

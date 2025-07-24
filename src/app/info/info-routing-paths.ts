@@ -6,6 +6,7 @@ export const FEEDBACK_PATH = 'feedback';
 export const COAR_NOTIFY_SUPPORT = 'coar-notify-support';
 export const ACCESSIBILITY_PATH = 'accessibility';
 export const POLICY_PATH = 'policy';
+export const CONTACT_US_PATH = 'contact-us';
 
 export function getEndUserAgreementPath() {
   return getSubPath(END_USER_AGREEMENT_PATH);
@@ -29,6 +30,10 @@ export function getAccessibilityPath() {
 
 export function getPolicyPath() {
   return getSubPath(POLICY_PATH);
+}
+
+export function getContactUsPath() {
+  return getSubPath(CONTACT_US_PATH);
 }
 
 function getSubPath(path: string) {

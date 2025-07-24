@@ -2211,6 +2211,13 @@
 
   "info.policy.title": "Repository Policy",
 
+  "info.contact-us.breadcrumbs": "Contact Us",
+  
+  "info.contact-us.head": "Contact Us",
+
+  "info.contact-us.title": "Contact Us",
+  // Custom end
+
 
   "item.alerts.private": "This item is non-discoverable",
 

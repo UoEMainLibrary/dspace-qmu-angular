@@ -105,10 +105,12 @@ import { WorkspaceItemsDeletePageComponent } from './app/workspaceitems-edit-pag
 
 import { AccessibilityComponent } from './app/info/accessibility/accessibility.component';
 import { PolicyComponent } from './app/info/policy/policy.component';
+import { ContactUsComponent } from './app/info/contact-us/contact-us.component';
 
 const DECLARATIONS = [
   AccessibilityComponent,
   PolicyComponent,
+  ContactUsComponent,
   FileSectionComponent,
   HomePageComponent,
   RootComponent,
