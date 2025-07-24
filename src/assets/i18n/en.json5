@@ -2198,6 +2198,20 @@
 
   "info.coar-notify-support.breadcrumbs": "COAR Notify Support",
 
+  // Custom 
+  "info.accessibility.breadcrumbs": "Accessibility Statement",
+
+  "info.accessibility.head": "Accessibility Statement",
+
+  "info.accessibility.title": "Accessibility Statement",
+
+  "info.policy.breadcrumbs": "Repository Policy",
+  
+  "info.policy.head": "Repository Policy",
+
+  "info.policy.title": "Repository Policy",
+
+
   "item.alerts.private": "This item is non-discoverable",
 
   "item.alerts.withdrawn": "This item has been withdrawn",
