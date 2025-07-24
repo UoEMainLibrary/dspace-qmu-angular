@@ -15,9 +15,13 @@ import {
   END_USER_AGREEMENT_PATH,
   FEEDBACK_PATH,
   PRIVACY_PATH,
+  ACCESSIBILITY_PATH,
+  POLICY_PATH,
 } from './info-routing-paths';
 import { NotifyInfoComponent } from './notify-info/notify-info.component';
 import { ThemedPrivacyComponent } from './privacy/themed-privacy.component';
+import { ThemedAccessibilityComponent } from './accessibility/themed-accessibility.component';
+import { ThemedPolicyComponent } from './policy/themed-policy.component';
 
 
 export const ROUTES: Routes = [
@@ -52,4 +56,16 @@ export const ROUTES: Routes = [
       breadcrumbKey: 'info.coar-notify-support',
     },
   } : undefined,
+  {
+    path: ACCESSIBILITY_PATH,
+    component: ThemedAccessibilityComponent,
+    resolve: { breadcrumb: i18nBreadcrumbResolver },
+    data: { title: 'info.accessibility.title', breadcrumbKey: 'info.accessibility' }
+  },
+  {
+    path: POLICY_PATH,
+    component: ThemedPolicyComponent,
+    resolve: { breadcrumb: i18nBreadcrumbResolver },
+    data: { title: 'info.policy.title', breadcrumbKey: 'info.policy' }
+  },
 ].filter((route: Route) => hasValue(route));
