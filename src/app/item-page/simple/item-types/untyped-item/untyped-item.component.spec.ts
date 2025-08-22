@@ -74,6 +74,7 @@ import {
   mockRouteService,
 } from '../shared/item.component.spec';
 import { UntypedItemComponent } from './untyped-item.component';
+import { ItemPageDoiFieldComponent } from '../../field-components/specific-field/doi/item-page-doi-field.component';
 
 const noMetadata = new MetadataMap();
 
@@ -151,6 +152,7 @@ describe('UntypedItemComponent', () => {
           ItemPageAbstractFieldComponent,
           ItemPageUriFieldComponent,
           CollectionsComponent,
+          ItemPageDoiFieldComponent,
         ],
       },
     });
