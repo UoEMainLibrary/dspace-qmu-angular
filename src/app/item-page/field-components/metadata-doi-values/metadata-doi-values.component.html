@@ -1,6 +1,6 @@
 <ds-metadata-field-wrapper [label]="label | translate">
     <div *ngFor="let mdValue of mdValues; let last=last let i=index;">
-        <a *ngIf="i == 0" class="dont-break-out" [href]="mdValue.value" [target]="hasInternalLink(mdValue.value) ? '_self' : '_blank'">
+        <a *ngIf="i >= 1" class="dont-break-out" [href]="mdValue.value" [target]="hasInternalLink(mdValue.value) ? '_self' : '_blank'">
         {{ linktext || mdValue.value }}<span *ngIf="!last" [innerHTML]="separator"></span>
         </a>
     </div>

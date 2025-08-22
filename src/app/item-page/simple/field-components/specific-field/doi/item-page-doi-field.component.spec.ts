@@ -17,7 +17,7 @@ import { environment } from '../../../../../../environments/environment';
 import { BrowseDefinitionDataService } from '../../../../../core/browse/browse-definition-data.service';
 import { BrowseDefinitionDataServiceStub } from '../../../../../shared/testing/browse-definition-data-service.stub';
 import { TranslateLoaderMock } from '../../../../../shared/testing/translate-loader.mock';
-import { MetadataUriValuesComponent } from '../../../../field-components/metadata-uri-values/metadata-uri-values.component';
+import { MetadataDoiValuesComponent } from '../../../../field-components/metadata-doi-values/metadata-doi-values.component';
 import { mockItemWithMetadataFieldsAndValue } from '../item-page-field.component.spec';
 import { ItemPageDoiFieldComponent } from './item-page-doi-field.component';
 
@@ -36,7 +36,7 @@ describe('ItemPageDoiFieldComponent', () => {
           provide: TranslateLoader,
           useClass: TranslateLoaderMock,
         },
-      }), ItemPageDoiFieldComponent, MetadataUriValuesComponent],
+      }), ItemPageDoiFieldComponent, MetadataDoiValuesComponent],
       providers: [
         { provide: APP_CONFIG, useValue: environment },
         { provide: BrowseDefinitionDataService, useValue: BrowseDefinitionDataServiceStub },

@@ -2803,6 +2803,10 @@
 
   "item.page.uri": "URI",
 
+  // Custom
+  "item.page.doi": "Official URL",
+  // Custom end
+
   "item.page.bitstreams.view-more": "Show more",
 
   "item.page.bitstreams.collapse": "Collapse",
