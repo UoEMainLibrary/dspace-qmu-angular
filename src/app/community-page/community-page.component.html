@@ -12,6 +12,8 @@
           <!-- Handle -->
           <ds-comcol-page-handle [content]="communityPayload.handle" [title]="'community.page.handle'">
           </ds-comcol-page-handle>
+          <!-- Special notice for eTheses community to be removed when auth is fixed -->
+          <p *ngIf="dsoNameService.getName(communityPayload) === 'eTheses'" style="color: red;">Please note that the login for QMU staff and students is not currently working. Please email <a href="mailto:theses@qmu.ac.uk">theses&#64;qmu.ac.uk</a>, from your QMU email address, with details of any dissertations that you would like to access and these will be sent back to you.</p>
           <!-- Introductory text -->
           <ds-comcol-page-content [content]="communityPayload.introductoryText" [hasInnerHtml]="true">
           </ds-comcol-page-content>
